@@ -1,11 +1,11 @@
-FROM node:22.14.0 
+FROM node:22.14.0
 
 WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install 
+RUN mkdir -p /var/www/html/public/dist
 
-COPY . .
+RUN npm install 
 
 CMD ["npm", "start"]

@@ -2,8 +2,19 @@ version: '3.8'
 
 services:
   npm:
-    build: .
+    build:
+      context: .
+      dockerfile: docker/npm/Dockerfile
     volumes:
       - .:/app
     working_dir: /app
     entrypoint: ["npm"]
+
+  php-apache:
+    build:
+      context: .
+      dockerfile: docker/php-apache/Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
