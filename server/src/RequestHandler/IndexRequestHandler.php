@@ -3,6 +3,7 @@
 namespace App\RequestHandler;
 
 use App\Service\Environment;
+use App\Service\FileInterface;
 use App\Service\ViewInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -13,6 +14,7 @@ final class IndexRequestHandler implements RequestHandlerInterface
     public function __construct(
         private readonly ViewInterface $view,
         private readonly Environment $environment,
+        private readonly FileInterface $file,
     ) {
     }
 
@@ -22,13 +24,10 @@ final class IndexRequestHandler implements RequestHandlerInterface
     
         $jsSrc = '';
 
-        if (file_exists($manifestPath)) {
-            
-            $manifest = json_decode(file_get_contents($manifestPath), true);
+        $manifest = $this->file->readJson($manifestPath);
 
-            if (isset($manifest['main.js'])) {
-                $jsSrc = $manifest['main.js'];
-            }
+        if (isset($manifest['main.js'])) {
+            $jsSrc = $manifest['main.js'];
         }
     
         return $this->view->render('index.twig', [

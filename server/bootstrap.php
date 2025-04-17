@@ -5,6 +5,8 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use App\Container;
 use App\RequestHandler\IndexRequestHandler;
 use App\Service\Environment;
+use App\Service\File;
+use App\Service\FileInterface;
 use App\Service\View;
 use App\Service\ViewInterface;
 use Slim\Factory\AppFactory;
@@ -16,6 +18,10 @@ $app = AppFactory::create(container: $container);
 
 $container->set(Environment::class, function () {
     return new Environment();
+});
+
+$container->set(FileInterface::class, function (Container $container) {
+    return new File();
 });
 
 $container->set(ViewInterface::class, function (Container $container) {
@@ -35,6 +41,7 @@ $container->set(IndexRequestHandler::class, function (Container $container) {
     return new IndexRequestHandler(
         $container->serviceView,
         $container->serviceEnvironment,
+        $container->serviceFile,
     );
 });
 

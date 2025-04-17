@@ -4,6 +4,7 @@ namespace App;
 
 use App\RequestHandler\IndexRequestHandler;
 use App\Service\Environment;
+use App\Service\FileInterface;
 use App\Service\ViewInterface;
 use Closure;
 use Pimple\Container as PimpleContainer;
@@ -15,6 +16,10 @@ final class Container implements ContainerInterface
 {
     public Environment $serviceEnvironment {
         get => $this->get(Environment::class);
+    }
+
+    public FileInterface $serviceFile {
+        get => $this->get(FileInterface::class);
     }
 
     public ViewInterface $serviceView {
