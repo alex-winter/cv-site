@@ -6,7 +6,7 @@ use App\Container;
 use App\RequestHandler\IndexRequestHandler;
 use App\Service\Environment;
 use App\Service\View;
-use Psr\Http\Message\ServerRequestInterface;
+use App\Service\ViewInterface;
 use Slim\Factory\AppFactory;
 use Slim\Views\Twig;
 
@@ -14,30 +14,31 @@ $container = new Container();
 
 $app = AppFactory::create(container: $container);
 
-$container->set('service-environment', fn () => new Environment());
+$container->set(Environment::class, function () {
+    return new Environment();
+});
 
-$container->set('service-view', function (Container $container) {
-    $environment = $container->get('service-environment');
+$container->set(ViewInterface::class, function (Container $container) {
+    $environment = $container->serviceEnvironment;
 
     return new View(
         Twig::create(
             $environment->getViewsDir(), 
-            ['cache' => $environment->isViewCache()],
+            [
+                'cache' => $environment->isViewCache(),
+            ],
         )
     );
 });
 
-$container->set('request-handler-index', fn () => new IndexRequestHandler(
-    $container->get('service-view'),
-    $container->get('service-environment'),
-));
-
-$app->get('/', function (ServerRequestInterface $request) use ($container) {
-    $handler = $container->get('request-handler-index');
-
-    return $handler->handle($request);
+$container->set(IndexRequestHandler::class, function (Container $container) {
+    return new IndexRequestHandler(
+        $container->serviceView,
+        $container->serviceEnvironment,
+    );
 });
 
+$app->get('/', $container->requestHandlerIndex);
 
 $app->get('/article/{uuid}', function () {});
 $app->post('/article/{uuid}', function () {});
