@@ -2,32 +2,48 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use Psr\Http\Message\ResponseInterface;
+use App\Container;
+use App\RequestHandler\IndexRequestHandler;
+use App\Service\Environment;
+use App\Service\View;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Factory\AppFactory;
 use Slim\Views\Twig;
-use Slim\Views\TwigMiddleware;
 
-$app = AppFactory::create();
+$container = new Container();
 
-$twig = Twig::create(__DIR__ . '/views', ['cache' => false]);
-$app->add(TwigMiddleware::create($app, $twig));
+$app = AppFactory::create(container: $container);
 
-$app->get('/', function (ServerRequestInterface $request, ResponseInterface $response) use ($twig) {
-    $manifestPath = __DIR__ . '/../public/dist/manifest.json';
+$container->set('service-environment', fn () => new Environment());
 
-    $jsSrc = '';
+$container->set('service-view', function (Container $container) {
+    $environment = $container->get('service-environment');
 
-    if (file_exists($manifestPath)) {
-        $manifest = json_decode(file_get_contents($manifestPath), true);
-        if (isset($manifest['main.js'])) {
-            $jsSrc = $manifest['main.js'];
-        }
-    }
-
-    return $twig->render($response, 'index.twig', [
-        'jsSrc' => $jsSrc
-    ]);
+    return new View(
+        Twig::create(
+            $environment->getViewsDir(), 
+            ['cache' => $environment->isViewCache()],
+        )
+    );
 });
+
+$container->set('request-handler-index', fn () => new IndexRequestHandler(
+    $container->get('service-view'),
+    $container->get('service-environment'),
+));
+
+$app->get('/', function (ServerRequestInterface $request) use ($container) {
+    $handler = $container->get('request-handler-index');
+
+    return $handler->handle($request);
+});
+
+
+$app->get('/article/{uuid}', function () {});
+$app->post('/article/{uuid}', function () {});
+$app->patch('/article/{uuid}', function () {});
+$app->delete('/article/{uuid}', function () {});
+
+$app->get('/articles', function () {});
 
 $app->run();

@@ -3,7 +3,7 @@
     "description": "cv site",
     "autoload": {
       "psr-4": {
-        "App\\": "server/"
+        "App\\": "server/src/"
       }
     },
     "require": {
