@@ -1,0 +1,1 @@
+docker-compose exec php-apache vendor/bin/phpunit server-tests
