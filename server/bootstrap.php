@@ -9,6 +9,7 @@ use App\Service\File;
 use App\Service\FileInterface;
 use App\Service\View;
 use App\Service\ViewInterface;
+use Doctrine\ORM\EntityManager;
 use Slim\Factory\AppFactory;
 use Slim\Views\Twig;
 
@@ -22,6 +23,22 @@ $container->set(Environment::class, function () {
 
 $container->set(FileInterface::class, function (Container $container) {
     return new File();
+});
+
+$container->set(EntityManager::class, function (Container $container) {
+    $config = require_once __DIR__ . '/config.php';
+            
+    $paths = [__DIR__.'/../src/Entity'];
+    
+    $isDevMode = true;
+
+    $ORMConfig = ORMSetup::createAttributeMetadataConfiguration($paths, $isDevMode);
+
+    $ORMConfig->setNamingStrategy(new UnderscoreNamingStrategy());
+
+    $connection = DriverManager::getConnection($config['database']);
+
+    return new EntityManager($connection, $ORMConfig);
 });
 
 $container->set(ViewInterface::class, function (Container $container) {
