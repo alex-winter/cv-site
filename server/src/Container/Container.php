@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Container;
 
 use App\RequestHandler\IndexRequestHandler;
 use App\Service\Environment;

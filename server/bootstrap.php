@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use App\Container;
+use App\Container\Container;
 use App\Entity\Article;
 use App\RequestHandler\IndexRequestHandler;
 use App\Service\EntityManagerService;
