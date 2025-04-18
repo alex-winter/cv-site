@@ -2,13 +2,14 @@
 
 namespace App\Service;
 
+use Composer\Factory;
 use RuntimeException;
 
 final class Environment
 {
     public function getDocumentRoot(): string 
     {
-        return $_SERVER['DOCUMENT_ROOT'] . '/../';
+        return __DIR__ . '/../../../';
     }
 
     public function getManifestPath(): string
@@ -21,11 +22,21 @@ final class Environment
         return $this->getDocumentRoot() . '/server/views';
     }
 
+    public function getEntitiesDir(): string 
+    {
+        return $this->getDocumentRoot() . '/server/src/Entity';
+    }
+
     public function isViewCache(): bool
     {
         $value = $this->getEnv('ENVIRONMENT_IS_VIEW_CACHE');
 
         return $value === 'true';
+    }
+
+    public function isDevelopment(): bool 
+    {
+        return $this->getEnv('ENVIRONMENT_NAME') === 'development';
     }
 
     public function getDatabaseName(): string
@@ -68,7 +79,7 @@ final class Environment
         if ($value === false) {
             throw new RuntimeException("Environment variable for '" . $key . "' not set");
         }
-        
+
         if (empty(trim($value))) {
             throw new RuntimeException("Environment variable for '" . $key . "' is empty");
         }

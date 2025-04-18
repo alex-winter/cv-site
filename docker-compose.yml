@@ -18,3 +18,36 @@ services:
       - "8080:80"
     volumes:
       - .:/var/www/html
+    environment:
+      - ENVIRONMENT_NAME=development
+      - ENVIRONMENT_IS_VIEW_CACHE=false
+      - ENVIRONMENT_DATABASE_NAME=app
+      - ENVIRONMENT_DATABASE_USER=appuser
+      - ENVIRONMENT_DATABASE_PASSWORD=apppassword
+      - ENVIRONMENT_DATABASE_HOST=database
+      - ENVIRONMENT_DATABASE_DRIVER=pdo_mysql
+      - ENVIRONMENT_DATABASE_CHARSET=utf8mb4
+    depends_on:
+      - database
+
+  database:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: app
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: apppassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./docker/database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+  dependencies:
+    image: dadarek/wait-for-dependencies
+    depends_on:
+      - database
+    command: database:3306
+
+volumes:
+  db-data:

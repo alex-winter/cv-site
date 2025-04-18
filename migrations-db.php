@@ -1,11 +1,7 @@
 <?php
 
-use Doctrine\DBAL\DriverManager;
-
 require_once __DIR__ . '/vendor/autoload.php';
 
-$config = require_once __DIR__ . '/bin/config.php';
+use App\Service\EntityManagerService;
 
-$connection = DriverManager::getConnection($config['database']);
-
-return $connection;
+return new EntityManagerService()->createConnection();

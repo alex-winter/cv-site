@@ -9,7 +9,10 @@ use App\Service\File;
 use App\Service\FileInterface;
 use App\Service\View;
 use App\Service\ViewInterface;
+use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Mapping\UnderscoreNamingStrategy;
+use Doctrine\ORM\ORMSetup;
 use Slim\Factory\AppFactory;
 use Slim\Views\Twig;
 
@@ -26,19 +29,7 @@ $container->set(FileInterface::class, function (Container $container) {
 });
 
 $container->set(EntityManager::class, function (Container $container) {
-    $config = require_once __DIR__ . '/config.php';
-            
-    $paths = [__DIR__.'/../src/Entity'];
-    
-    $isDevMode = true;
-
-    $ORMConfig = ORMSetup::createAttributeMetadataConfiguration($paths, $isDevMode);
-
-    $ORMConfig->setNamingStrategy(new UnderscoreNamingStrategy());
-
-    $connection = DriverManager::getConnection($config['database']);
-
-    return new EntityManager($connection, $ORMConfig);
+    return require_once __DIR__ . '/bin/entity-manager.php';
 });
 
 $container->set(ViewInterface::class, function (Container $container) {
