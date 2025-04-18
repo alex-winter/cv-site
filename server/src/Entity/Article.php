@@ -15,16 +15,23 @@ class Article
     use Id;
     use CreatedAt;
 
-    public function __construct(
-        string $title,
-        DateTimeImmutable $createdAt,
-    ) {
-        $this->title = $title;
-        $this->createdAt = $createdAt;
-    }
-
     #[ORM\Column(type: 'string')]
     public string $title {
         get => $this->title;
+    }
+
+    #[ORM\Column(type: 'string')]
+    public string $slug {
+        get => $this->slug;
+    }
+
+    public function __construct(
+        string $title,
+        DateTimeImmutable $createdAt,
+        string $slug,
+    ) {
+        $this->title = $title;
+        $this->createdAt = $createdAt;
+        $this->slug = $slug;
     }
 }
