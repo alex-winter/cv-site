@@ -7,6 +7,7 @@ use App\Service\Environment;
 use App\Service\FileInterface;
 use App\Service\ViewInterface;
 use Closure;
+use Doctrine\ORM\EntityManager;
 use Pimple\Container as PimpleContainer;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -16,6 +17,10 @@ final class Container implements ContainerInterface
 {
     public Environment $serviceEnvironment {
         get => $this->get(Environment::class);
+    }
+
+    public EntityManager $serviceEntityManager {
+        get => $this->get(EntityManager::class);
     }
 
     public FileInterface $serviceFile {
