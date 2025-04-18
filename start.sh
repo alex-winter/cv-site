@@ -14,4 +14,6 @@ docker-compose run --rm dependencies
 
 ./db-migrate.sh
 
+docker-compose exec php-apache php server/seed/seed.php
+
 echo "http://localhost:8080"

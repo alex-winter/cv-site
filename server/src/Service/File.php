@@ -16,4 +16,9 @@ final class File implements FileInterface
 
         return [];
     }
+
+    public function read(string $path): string 
+    {
+        return file_get_contents($path);
+    }
 }
