@@ -10,5 +10,8 @@ docker-compose up -d
 
 docker-compose exec php-apache composer install --working-dir=/var/www/html
 
+docker-compose run --rm dependencies
+
+./db-migrate.sh
 
 echo "http://localhost:8080"
