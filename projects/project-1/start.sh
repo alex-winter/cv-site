@@ -5,7 +5,7 @@ SCRIPT_DIR=$(dirname "$(realpath "$0")")
 
 cd "$SCRIPT_DIR"
 
-dc() { sudo docker-compose "$@"; }
+dc() { docker-compose "$@"; }
 
 dc down -v --remove-orphans
 

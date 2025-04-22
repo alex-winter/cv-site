@@ -1,7 +1,7 @@
 const express = require('express')
 const fs = require('fs')
 const path = require('path')
-const { exec } = require('child_process')
+const { spawn } = require('child_process')
 
 const PORT = 3000
 
@@ -15,21 +15,34 @@ app.get('/', (_, response) => {
     response.sendFile(path.join(__dirname, 'public', 'index.html'))
 })
 
-app.post('/launch/:project', (req, res) => {
+app.get('/launch/:project', (req, res) => {
     const project = req.params.project
-    const composePath = path.join(projectsDir, project, 'docker-compose.yml')
+    const startPath = path.join(projectsDir, project, 'start.sh')
 
-    if (!fs.existsSync(composePath)) {
+    if (!fs.existsSync(startPath)) {
         return res.status(404).send('Project not found')
     }
 
-    exec(`docker compose -f ${composePath} up -d`, (err, stdout, stderr) => {
-        if (err) {
-            console.error(stderr)
-            return res.status(500).send('Failed to launch')
-        }
+    res.setHeader('Content-Type', 'text/plain')
 
-        res.send(`Launched ${project}`)
+    const child = spawn('bash', [startPath])
+
+    child.stdout.on('data', (data) => {
+        res.write(data)
+    })
+
+    child.stderr.on('data', (data) => {
+        res.write(data) // or res.write(`[stderr] ${data}`)
+    })
+
+    child.on('close', (code) => {
+        res.write(`\nProcess exited with code ${code}`)
+        res.end()
+    })
+
+    // Handle client disconnect
+    req.on('close', () => {
+        child.kill()
     })
 })
 
