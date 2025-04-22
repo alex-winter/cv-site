@@ -5,6 +5,8 @@ namespace App\Container;
 use App\RequestHandler\IndexRequestHandler;
 use App\Service\Environment;
 use App\Service\FileInterface;
+use App\Service\Repository\ArticleRepository;
+use App\Service\Repository\ArticleRepositoryInterface;
 use App\Service\ViewInterface;
 use Closure;
 use Doctrine\ORM\EntityManager;
@@ -25,6 +27,10 @@ final class Container implements ContainerInterface
 
     public FileInterface $serviceFile {
         get => $this->get(FileInterface::class);
+    }
+
+    public ArticleRepository $articleRepository {
+        get => $this->get(ArticleRepositoryInterface::class);
     }
 
     public ViewInterface $serviceView {

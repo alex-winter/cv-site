@@ -1,6 +1,8 @@
 {
     "compilerOptions": {
-        "target": "ES6",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "target": "esnext",
         "module": "commonjs",
         "outDir": "./public/dist",
         "baseUrl": "./",

@@ -10,14 +10,14 @@ services:
     working_dir: /app
     entrypoint: ["npm"]
 
-  php-apache:
+  php-server:
     build:
       context: .
-      dockerfile: docker/php-apache/Dockerfile
+      dockerfile: docker/php-server/Dockerfile
     ports:
-      - "8080:80"
+      - "8081:80"
     volumes:
-      - .:/var/www/html
+      - ./:/var/www/html
     environment:
       - ENVIRONMENT_NAME=development
       - ENVIRONMENT_IS_VIEW_CACHE=false
@@ -29,6 +29,8 @@ services:
       - ENVIRONMENT_DATABASE_CHARSET=utf8mb4
     depends_on:
       - database
+    networks:
+      - app-network 
 
   database:
     image: mysql:8.0
@@ -42,12 +44,20 @@ services:
     volumes:
       - db-data:/var/lib/mysql
       - ./docker/database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - app-network 
 
   dependencies:
     image: dadarek/wait-for-dependencies
     depends_on:
       - database
     command: database:3306
+    networks:
+      - app-network 
 
 volumes:
   db-data:
+
+networks:
+  app-network:
+    driver: bridge 

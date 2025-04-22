@@ -14,4 +14,6 @@ WORKDIR /var/www/html
 
 COPY . /var/www/html
 
-COPY docker/php-apache/apache.conf /etc/apache2/sites-available/000-default.conf
+COPY docker/php-server/apache.conf /etc/apache2/sites-available/000-default.conf
+
+EXPOSE 80
