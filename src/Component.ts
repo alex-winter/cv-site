@@ -10,7 +10,7 @@ export type Listeners = BaseListeners
 export abstract class Component extends BaseComponent {
     protected get globalStylesheets(): string[] {
         return [
-            // '/dist/index.css'
+            '/dist/index.css'
         ]
     }
 }
