@@ -1,6 +1,17 @@
 import { Component } from 'Component'
 import { Dom } from 'Services/Dom'
 
+type Job = {
+    company: {
+        name: string
+        description: string
+    }
+    start: string
+    end: string
+    titles: string[]
+    points: string[]
+}
+
 export class App extends Component {
 
     protected css(): string {
@@ -102,11 +113,104 @@ export class App extends Component {
             .badge {
                 background-color: var(--dark-blue);
             }
+
+            .timeline {
+                position: relative;
+                padding-left: 2.5rem;
+            }
+
+            .timeline::before {
+                content: "";
+                display: inline-block;
+                width: 3px;
+                height: 100%;
+                background: rgba(0, 0, 0, .1);
+                left: 13px;
+                top: 16px;
+                position: absolute;
+            }
+
+            .timeline-job {
+                position: relative;
+            }
+
+            .timeline-job::before {
+                content: "";
+                display: inline-block;
+                position: absolute;
+                left: -30px;
+                top: 3px;
+                width: 10px;
+                height: 10px;
+                border: 2px solid var(--light-blue);
+                background: rgba(0, 0, 0, .3);
+                border-radius: 50%;
+            }
         `
     }
 
     protected build(): HTMLElement {
         const container = Dom.div('container')
+
+        const jobs: Job[] = [
+            {
+                company: {
+                    name: 'Mitratech Prevalent',
+                    description: 'Risk management platform',
+                },
+                start: '2023',
+                end: '2025',
+                titles: ['Software Engineer'],
+                points: [
+                    'Designed and delivered full-stack solutions aligned with stakeholder requirements.',
+                    'Oversaw the complete software lifecycle: design, implementation, testing, and deployment.',
+                    'Led platform upgrades and promoted stronger testing practices across the team.',
+                ],
+            },
+            {
+                company: {
+                    name: 'Efficio Consulting',
+                    description: 'Procurement consultancy',
+                },
+                start: '2016',
+                end: '2023',
+                titles: ['Software Engineer', 'Team Lead'],
+                points: [
+                    'Mentoring developers / Upskilling',
+                    'Initiated and led engineering-wide improvements, with a focus on quality, maintainability, and delivery speed.',
+                    'Lead development team on number of platform greenfields, additional features on existing products, upgrades of legacy software',
+                    'Advocate of TDD within digital',
+                ],
+            },
+            {
+                company: {
+                    name: 'Dedoko',
+                    description: 'website and web application development',
+                },
+                start: '2015',
+                end: '2016',
+                titles: ['Junior Developer'],
+                points: [
+                    'bug fixing',
+                    'website maintenance',
+                    'development of our main client (Efficio) platform of the time who later aquired Dedoko',
+                ],
+            },
+            {
+                company: {
+                    name: 'Techbods',
+                    description: 'Electronics repair shop / websites ',
+                },
+                start: '2012',
+                end: '2015',
+                titles: ['Full-Stack Web Developer'],
+                points: [
+                    'customer service',
+                    'website creation and maintenance',
+                    'developed the internal job tracking system',
+                ],
+            },
+        ]
 
         container.innerHTML = /*html*/`
             <div class="row text-center">
@@ -132,19 +236,29 @@ export class App extends Component {
             </div>
 
             <div class="row py-3 gx-5">
-                <div class="col-12 col-md-8 border-b">
-                    <div class="icon-heading">
-                        <h3><i class="fa-solid fa-user-tie"></i> About Me</h3>
+                <div class="col-12 col-md-8">
+                    <div class="row border-b">
+                        <div class="icon-heading">
+                            <h3><i class="fa-solid fa-user-tie"></i> About Me</h3>
+                        </div>
+                        <p>
+                            A seasoned web developer with 10+ years of hands-on experience building and 
+                            maintaining scalable, high-performance web applications. I bring deep expertise 
+                            in both frontend and backend technologies, with a strong focus on clean, efficient, 
+                            and maintainable code. I take pride in delivering reliable, user-focused solutions and 
+                            have a track record of consistently shipping quality work. Beyond the 9-to-5, 
+                            I’m always exploring new tools and working on side projects — constantly learning, 
+                            improving, and keeping my skills sharp.
+                        </p>
                     </div>
-                    <p>
-                        A seasoned web developer with 10+ years of hands-on experience building and 
-                        maintaining scalable, high-performance web applications. I bring deep expertise 
-                        in both frontend and backend technologies, with a strong focus on clean, efficient, 
-                        and maintainable code. I take pride in delivering reliable, user-focused solutions and 
-                        have a track record of consistently shipping quality work. Beyond the 9-to-5, 
-                        I’m always exploring new tools and working on side projects — constantly learning, 
-                        improving, and keeping my skills sharp.
-                    </p>
+                    <div class="row border-b">
+                        <div class="icon-heading">
+                            <h3><i class="fa-solid fa-suitcase"></i> Work Experience</h3>
+                        </div>
+                        <div class="timeline">
+                            ${this.buildJobs(jobs)}
+                        </div>
+                    </div>
                 </div>
                 <div class="col-12 col-md-4">
                     <div class="row">
@@ -162,6 +276,7 @@ export class App extends Component {
                             <div class="badge">CSS3</div>
                             <div class="badge">Angular</div>
                             <div class="badge">React</div>
+                            <div class="badge">Git</div>
                         </div>
                     </div>
                     <div class="row">
@@ -180,5 +295,17 @@ export class App extends Component {
         `
 
         return container
+    }
+
+
+
+    private buildJobs(jobs: Job[]): string {
+        return jobs.map(job => /*html*/`
+            <div class="timeline-job">
+                <p>a</p>
+                <p>a</p>
+                <p>a</p>
+            </div>
+        `).join('')
     }
 }
