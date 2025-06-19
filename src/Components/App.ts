@@ -10,10 +10,11 @@ export class App extends Component {
             }
 
             .container {
-               background: var(--mid-blue);
-               border-radius: 5px;
-               margin-top: 70px;
-               padding: 50px;
+                background: var(--mid-blue);
+                border-radius: 5px;
+                margin-top: 70px;
+                padding: 50px;
+                margin-top: 140px;
             }
 
             h1, h2, h3 {
@@ -47,7 +48,7 @@ export class App extends Component {
                 overflow: hidden;
                 margin: -140px auto 0; 
                 padding: 0;
-                border: 8px solid var(--dark-colour);
+                border: 8px solid var(--mid-blue);
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -97,6 +98,10 @@ export class App extends Component {
                 text-transform: uppercase;
                 font-weight: bold;
             }
+
+            .badge {
+                background-color: var(--dark-blue);
+            }
         `
     }
 
@@ -142,7 +147,34 @@ export class App extends Component {
                     </p>
                 </div>
                 <div class="col-4">
-
+                    <div class="row">
+                        <div class="col-12 border-bottom py-3">
+                            <div class="icon-heading">
+                                <h3><i class="fa-solid fa-user-tie"></i> Tech Stack Experience</h3>
+                            </div>
+                            <div class="badge">PHP</div>
+                            <div class="badge">JavaScript</div>
+                            <div class="badge">TypeScript</div>
+                            <div class="badge">Docker</div>
+                            <div class="badge">Laravel</div>
+                            <div class="badge">Slim</div>
+                            <div class="badge">HTML5</div>
+                            <div class="badge">CSS3</div>
+                            <div class="badge">Angular</div>
+                            <div class="badge">React</div>
+                        </div>
+                    </div>
+                    <div class="row border-bottom py-3">
+                        <div class="col-12">
+                            <div class="icon-heading">
+                                <h3><i class="fa-solid fa-user-tie"></i> Soft Skill Experience</h3>
+                            </div>
+                            <div class="badge">Mentoring</div>
+                            <div class="badge">Upskilling</div>
+                            <div class="badge">Team Lead</div>
+                            <div class="badge">TDD Advocate</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         `
