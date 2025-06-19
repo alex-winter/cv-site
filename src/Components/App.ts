@@ -10,19 +10,34 @@ export class App extends Component {
             }
 
             .container {
-               background: #1e2738;
+               background: var(--mid-blue);
                border-radius: 5px;
                margin-top: 70px;
                padding: 50px;
             }
 
             h1, h2, h3 {
-               color: #fcffff;
+               color: var(--white);
+            }
+
+            h2, h3 {
+                letter-spacing: .15rem;
+            }
+
+            h1 {
+                letter-spacing: .5rem;
+            }
+
+            h3 {
+                font-size: 1.125rem;
             }
 
             .name, .title {
                  text-transform: uppercase;
-                 color: #fcffff;
+            }
+
+            .name {
+                font-weight: 800;
             }
 
             .profile-image {
@@ -32,7 +47,7 @@ export class App extends Component {
                 overflow: hidden;
                 margin: -140px auto 0; 
                 padding: 0;
-                border: 8px solid #1e2738;
+                border: 8px solid var(--dark-colour);
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -45,15 +60,16 @@ export class App extends Component {
                 display: block;
             }
 
-            .border-top {
-                border-top: 1px solid #a5b3ce;
+            .border-t {
+                border-top: 1px solid var(--border-colour);
             }
 
-            .border-bottom {
-                border-bottom: 1px solid #a5b3ce;
+            .border-b {
+                border-bottom: 1px solid var(--border-colour);
             }
 
-            .contact-info > div {
+            .contact-info > div,
+            .icon-heading {
                 white-space: nowrap;
             }
 
@@ -62,12 +78,24 @@ export class App extends Component {
             }
 
             .contact-info a {
-                color: #a5b3ce;
+                color: var(--light-blue);
                 text-decoration: none;
             }
 
             .contact-info a:hover {
                 text-decoration: underline;
+            }
+
+            .icon-heading i {
+                padding: 12px 14px;
+                background: var(--dark-blue);
+                border-radius: 50%;
+                font-size: 0.7em;
+            }
+
+            .icon-heading h3 {
+                text-transform: uppercase;
+                font-weight: bold;
             }
         `
     }
@@ -84,7 +112,7 @@ export class App extends Component {
                 <p class="title">Senior Web Engineer</p>
             </div>
 
-            <div class="row border-top border-bottom text-center contact-info p-3">
+            <div class="row border-t border-b text-center contact-info p-3">
                 <div class="col-12 col-sm-6 col-md-4">
                     <i class="fas fa-phone"></i> 07783345369
                 </div>
@@ -95,6 +123,26 @@ export class App extends Component {
                 <div class="col-12 col-sm-12 col-md-4">
                     <i class="fab fa-github"></i>
                     <a href="https://github.com/alex-winter" target="_blank">alex-winter</a>
+                </div>
+            </div>
+
+            <div class="row py-3">
+                <div class="col-8 border-b">
+                    <div class="icon-heading">
+                        <h3><i class="fa-solid fa-user-tie"></i> About Me</h3>
+                    </div>
+                    <p>
+                        A seasoned web developer with 10+ years of hands-on experience building and 
+                        maintaining scalable, high-performance web applications. I bring deep expertise 
+                        in both frontend and backend technologies, with a strong focus on clean, efficient, 
+                        and maintainable code. I take pride in delivering reliable, user-focused solutions and 
+                        have a track record of consistently shipping quality work. Beyond the 9-to-5, 
+                        I’m always exploring new tools and working on side projects — constantly learning, 
+                        improving, and keeping my skills sharp.
+                    </p>
+                </div>
+                <div class="col-4">
+
                 </div>
             </div>
         `

@@ -1,17 +1,27 @@
 @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css');
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap');
+
+:root {
+    --border-colour: rgba(165, 179, 206, 0.3);
+
+    --dark-blue: #19212e;
+    --mid-blue: #1e2738;
+    --light-blue: #a5b3ce;
+    --white: #fff;
+}
 
 html,
 body {
     padding: 0;
     margin: 0;
 
-    font-family: Roboto, sans-serif;
+    font-family: Inter, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 400;
 
-    background: #19212e;
-    color: #a5b3ce;
+    background: var(--dark-blue);
+    color: var(--light-blue);
 }
