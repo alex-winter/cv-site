@@ -88,7 +88,7 @@ export class App extends Component {
             }
 
             .icon-heading i {
-                padding: 12px 14px;
+                padding: 12px 10px 10px 12px;
                 background: var(--dark-blue);
                 border-radius: 50%;
                 font-size: 0.7em;
@@ -131,8 +131,8 @@ export class App extends Component {
                 </div>
             </div>
 
-            <div class="row py-3">
-                <div class="col-8 border-b">
+            <div class="row py-3 gx-5">
+                <div class="col-12 col-md-8 border-b">
                     <div class="icon-heading">
                         <h3><i class="fa-solid fa-user-tie"></i> About Me</h3>
                     </div>
@@ -146,11 +146,11 @@ export class App extends Component {
                         improving, and keeping my skills sharp.
                     </p>
                 </div>
-                <div class="col-4">
+                <div class="col-12 col-md-4">
                     <div class="row">
-                        <div class="col-12 border-bottom py-3">
+                        <div class="col-12 border-b py-3">
                             <div class="icon-heading">
-                                <h3><i class="fa-solid fa-user-tie"></i> Tech Stack Experience</h3>
+                                <h3><i class="fa-solid fa-microchip"></i> Tech Stack</h3>
                             </div>
                             <div class="badge">PHP</div>
                             <div class="badge">JavaScript</div>
@@ -164,10 +164,10 @@ export class App extends Component {
                             <div class="badge">React</div>
                         </div>
                     </div>
-                    <div class="row border-bottom py-3">
-                        <div class="col-12">
+                    <div class="row">
+                        <div class="col-12 border-b py-3">
                             <div class="icon-heading">
-                                <h3><i class="fa-solid fa-user-tie"></i> Soft Skill Experience</h3>
+                                <h3><i class="fa-solid fa-user-tie"></i> Soft Skill</h3>
                             </div>
                             <div class="badge">Mentoring</div>
                             <div class="badge">Upskilling</div>
