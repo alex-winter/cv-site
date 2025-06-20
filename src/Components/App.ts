@@ -1,5 +1,6 @@
 import { Component } from 'Component'
 import { Dom } from 'Services/Dom'
+import Chart from 'chart.js/auto'
 
 type Job = {
     company: {
@@ -10,6 +11,12 @@ type Job = {
     end: string
     titles: string[]
     points: string[]
+}
+
+type TechSkill = {
+    name: string
+    level: number
+    years: string
 }
 
 export class App extends Component {
@@ -23,7 +30,6 @@ export class App extends Component {
             .container {
                 background: var(--mid-blue);
                 border-radius: 5px;
-                margin-top: 70px;
                 padding: 50px;
                 margin-top: 140px;
             }
@@ -146,6 +152,11 @@ export class App extends Component {
                 background: rgba(0, 0, 0, .3);
                 border-radius: 50%;
             }
+
+            .progress-bar {
+                background-color: var(--light-blue);
+                color: var(--dark-blue);
+            }
         `
     }
 
@@ -212,6 +223,59 @@ export class App extends Component {
             },
         ]
 
+        const tech: TechSkill[] = [
+            {
+                name: 'JavaScript',
+                level: 95,
+                years: '10+'
+            },
+            {
+                name: 'TypeScript',
+                level: 95,
+                years: '7+'
+            },
+            {
+                name: 'Docker',
+                level: 95,
+                years: '10+'
+            },
+            {
+                name: 'Laravel',
+                level: 95,
+                years: '5+'
+            },
+            {
+                name: 'Slim',
+                level: 95,
+                years: '8+'
+            },
+            {
+                name: 'HTML5',
+                level: 100,
+                years: '10+'
+            },
+            {
+                name: 'CSS3',
+                level: 90,
+                years: '10+'
+            },
+            {
+                name: 'Angular',
+                level: 55,
+                years: '2+'
+            },
+            {
+                name: 'React',
+                level: 30,
+                years: '1'
+            },
+            {
+                name: 'Git',
+                level: 95,
+                years: '10+'
+            },
+        ]
+
         container.innerHTML = /*html*/`
             <div class="row text-center">
                 <div class="profile-image">
@@ -237,7 +301,7 @@ export class App extends Component {
 
             <div class="row py-3 gx-5">
                 <div class="col-12 col-md-8">
-                    <div class="row border-b">
+                    <div class="row border-b py-4">
                         <div class="icon-heading">
                             <h3><i class="fa-solid fa-user-tie"></i> About Me</h3>
                         </div>
@@ -251,7 +315,7 @@ export class App extends Component {
                             improving, and keeping my skills sharp.
                         </p>
                     </div>
-                    <div class="row border-b">
+                    <div class="row border-b py-4">
                         <div class="icon-heading">
                             <h3><i class="fa-solid fa-suitcase"></i> Work Experience</h3>
                         </div>
@@ -266,28 +330,23 @@ export class App extends Component {
                             <div class="icon-heading">
                                 <h3><i class="fa-solid fa-microchip"></i> Tech Stack</h3>
                             </div>
-                            <div class="badge">PHP</div>
-                            <div class="badge">JavaScript</div>
-                            <div class="badge">TypeScript</div>
-                            <div class="badge">Docker</div>
-                            <div class="badge">Laravel</div>
-                            <div class="badge">Slim</div>
-                            <div class="badge">HTML5</div>
-                            <div class="badge">CSS3</div>
-                            <div class="badge">Angular</div>
-                            <div class="badge">React</div>
-                            <div class="badge">Git</div>
+                            ${this.buildTech(tech)}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12 border-b py-3">
                             <div class="icon-heading">
-                                <h3><i class="fa-solid fa-user-tie"></i> Soft Skill</h3>
+                                <h3><i class="fa-solid fa-user-tie"></i> Soft Skills</h3>
                             </div>
                             <div class="badge">Mentoring</div>
                             <div class="badge">Upskilling</div>
                             <div class="badge">Team Lead</div>
                             <div class="badge">TDD Advocate</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 border-b py-3">
+                            <canvas></canvas>
                         </div>
                     </div>
                 </div>
@@ -297,15 +356,95 @@ export class App extends Component {
         return container
     }
 
+    protected afterBuild(): void {
+        this.makeProfileGraph()
+    }
 
-
-    private buildJobs(jobs: Job[]): string {
-        return jobs.map(job => /*html*/`
-            <div class="timeline-job">
-                <p>a</p>
-                <p>a</p>
-                <p>a</p>
+    private buildTech(tech: TechSkill[]): string {
+        return tech.map(skill => /*html*/`
+            <div class="py-2">
+                <div class="progress align-self-center" role="progressbar" aria-label="Example with label" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar" style="width: ${skill.level.toString()}%">${skill.name}</div>
+                </div>  
             </div>
         `).join('')
     }
+
+    private buildJobs(jobs: Job[]): string {
+        return jobs.map(job => /*html*/`
+            <div class="timeline-job my-3">
+                <div class="row heading">
+                    <div class="col-6">
+                        ${job.start} - ${job.end}
+                    </div>
+                    <div class="col-6 text-end">
+                        <div class="badge" >${job.company.name}</div>
+                    </div>
+                </div>
+                <div class="row points">
+                    <h3>${job.titles.join(' / ')}</h3>
+                    <ul>
+                        <li>${job.points.join('</li><li>')}</li>
+                    </ul>
+                </div>
+            </div>
+        `).join('')
+    }
+
+    private makeProfileGraph() {
+        const canvas: HTMLCanvasElement = this.findOne('canvas')!
+
+        const data = {
+            labels: [
+                'Frontend Engineering',
+                'Winning at Mario Kart',
+                'Backend Engineering',
+                'Understanding IKEA Instructions',
+                'Team Leadership',
+                'Problem Solving',
+                'Remembering Why I Walked into a Room',
+                'Mentorship',
+                'System Design'
+            ],
+            datasets: [{
+                label: 'Skill Proficiency',
+                data: [90, 45, 95, 20, 85, 88, 50, 92, 95],
+                fill: true,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgb(75, 192, 192)',
+                pointBackgroundColor: 'rgb(75, 192, 192)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgb(75, 192, 192)'
+            }]
+        }
+
+        const config = {
+            type: 'radar',
+            data: data,
+            options: {
+                scales: {
+                    r: {
+                        angleLines: {
+                            display: true
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: 100,
+                        ticks: {
+                            display: false
+                        }
+                    }
+                },
+                elements: {
+                    line: {
+                        borderWidth: 3
+                    }
+                },
+                responsive: true,
+            }
+        }
+
+        new Chart(canvas, config as unknown as any)
+    }
+
 }
