@@ -50,6 +50,10 @@ export class App extends Component {
                 font-size: 1.125rem;
             }
 
+            ul {
+                list-style-position: inside;
+            }
+
             .name, .title {
                  text-transform: uppercase;
             }
@@ -131,7 +135,7 @@ export class App extends Component {
                 width: 3px;
                 height: 100%;
                 background: rgba(0, 0, 0, .1);
-                left: 13px;
+                left: 28px;
                 top: 16px;
                 position: absolute;
             }
@@ -144,7 +148,7 @@ export class App extends Component {
                 content: "";
                 display: inline-block;
                 position: absolute;
-                left: -30px;
+                left: -15px;
                 top: 3px;
                 width: 10px;
                 height: 10px;
@@ -372,8 +376,8 @@ export class App extends Component {
 
     private buildJobs(jobs: Job[]): string {
         return jobs.map(job => /*html*/`
-            <div class="timeline-job my-3">
-                <div class="row heading">
+            <div class="timeline-job px-3 pl-3 mt-3 mb-5">
+                <div class="row heading pb-2">
                     <div class="col-6">
                         ${job.start} - ${job.end}
                     </div>
@@ -399,8 +403,8 @@ export class App extends Component {
                 'Frontend Engineering',
                 'Winning at Mario Kart',
                 'Backend Engineering',
-                'Understanding IKEA Instructions',
                 'Team Leadership',
+                'Understanding IKEA Instructions',
                 'Problem Solving',
                 'Remembering Why I Walked into a Room',
                 'Mentorship',
@@ -408,7 +412,7 @@ export class App extends Component {
             ],
             datasets: [{
                 label: 'Skill Proficiency',
-                data: [90, 45, 95, 20, 85, 88, 50, 92, 95],
+                data: [90, 45, 95, 75, 20, 88, 50, 92, 95],
                 fill: true,
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 borderColor: 'rgb(75, 192, 192)',
