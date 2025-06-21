@@ -32,6 +32,7 @@ export class App extends Component {
                 border-radius: 5px;
                 padding: 50px;
                 margin-top: 140px;
+                margin-bottom: 40px;
             }
 
             h1, h2, h3 {
@@ -245,7 +246,7 @@ export class App extends Component {
             },
             {
                 name: 'Laravel',
-                level: 95,
+                level: 85,
                 years: '5+'
             },
             {
@@ -270,7 +271,7 @@ export class App extends Component {
             },
             {
                 name: 'React',
-                level: 30,
+                level: 40,
                 years: '1'
             },
             {
@@ -319,7 +320,7 @@ export class App extends Component {
                             improving, and keeping my skills sharp.
                         </p>
                     </div>
-                    <div class="row border-b py-4">
+                    <div class="row py-4">
                         <div class="icon-heading">
                             <h3><i class="fa-solid fa-suitcase"></i> Work Experience</h3>
                         </div>
@@ -401,18 +402,18 @@ export class App extends Component {
         const data = {
             labels: [
                 'Frontend Engineering',
-                'Winning at Mario Kart',
+                // 'Winning at Mario Kart',
                 'Backend Engineering',
                 'Team Leadership',
-                'Understanding IKEA Instructions',
+                // 'Understanding IKEA Instructions',
                 'Problem Solving',
-                'Remembering Why I Walked into a Room',
+                // 'Remembering Why I Walked into a Room',
                 'Mentorship',
                 'System Design'
             ],
             datasets: [{
                 label: 'Skill Proficiency',
-                data: [90, 45, 95, 75, 20, 88, 50, 92, 95],
+                data: [90, 95, 75, 88, 80, 95],
                 fill: true,
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 borderColor: 'rgb(75, 192, 192)',
