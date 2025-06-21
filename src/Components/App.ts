@@ -27,12 +27,12 @@ type Project = {
 
 const projects = [
     {
-        url: '',
+        url: 'https://github.com/alex-winter/event-driven-web-component-framework',
         title: 'Event Driven Web Component Framework',
         description: 'My very own JS framework that I use for my personal projects',
     },
     {
-        url: '',
+        url: 'https://github.com/alex-winter/game-maker',
         title: '2d Game Maker',
         description: 'Layers of complexity to improve my core JS and client side knowledge',
     },
@@ -98,7 +98,6 @@ const jobs: Job[] = [
     },
 ]
 
-
 const tech: TechSkill[] = [
     {
         name: 'JavaScript',
@@ -112,7 +111,7 @@ const tech: TechSkill[] = [
     },
     {
         name: 'Docker',
-        level: 95,
+        level: 80,
         years: '10+'
     },
     {
@@ -403,10 +402,12 @@ export class App extends Component {
 
     private buildProjectLinks(projects: Project[]): string {
         return projects.map(project => /*html*/`
-            <a href="${project.url}">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i> ${project.title}
-            </a>
-            <p>${project.description}</p>    
+            <div class="row my-2">
+                <a href="${project.url}" target="blank">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> ${project.title}
+                </a>
+                <small>${project.description}</small>  
+            </div>
         `).join('')
     }
 
