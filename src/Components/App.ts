@@ -100,6 +100,11 @@ const jobs: Job[] = [
 
 const tech: TechSkill[] = [
     {
+        name: 'PHP',
+        level: 100,
+        years: '10+'
+    },
+    {
         name: 'JavaScript',
         level: 95,
         years: '10+'
@@ -121,7 +126,7 @@ const tech: TechSkill[] = [
     },
     {
         name: 'Slim',
-        level: 95,
+        level: 100,
         years: '8+'
     },
     {
