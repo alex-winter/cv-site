@@ -25,6 +25,133 @@ type Project = {
     description: string
 }
 
+const projects = [
+    {
+        url: '',
+        title: 'Event Driven Web Component Framework',
+        description: 'My very own JS framework that I use for my personal projects',
+    },
+    {
+        url: '',
+        title: '2d Game Maker',
+        description: 'Layers of complexity to improve my core JS and client side knowledge',
+    },
+]
+
+const jobs: Job[] = [
+    {
+        company: {
+            name: 'Mitratech Prevalent',
+            description: 'Risk management platform',
+        },
+        start: '2023',
+        end: '2025',
+        titles: ['Software Engineer'],
+        points: [
+            'Designed and delivered full-stack solutions aligned with stakeholder requirements.',
+            'Oversaw the complete software lifecycle: design, implementation, testing, and deployment.',
+            'Led platform upgrades and promoted stronger testing practices across the team.',
+        ],
+    },
+    {
+        company: {
+            name: 'Efficio Consulting',
+            description: 'Procurement consultancy',
+        },
+        start: '2016',
+        end: '2023',
+        titles: ['Software Engineer', 'Team Lead'],
+        points: [
+            'Mentoring developers / Upskilling',
+            'Initiated and led engineering-wide improvements, with a focus on quality, maintainability, and delivery speed.',
+            'Lead development team on number of platform greenfields, additional features on existing products, upgrades of legacy software',
+            'Advocate of TDD within digital',
+        ],
+    },
+    {
+        company: {
+            name: 'Dedoko',
+            description: 'website and web application development',
+        },
+        start: '2015',
+        end: '2016',
+        titles: ['Junior Developer'],
+        points: [
+            'bug fixing',
+            'website maintenance',
+            'development of our main client (Efficio) platform of the time who later aquired Dedoko',
+        ],
+    },
+    {
+        company: {
+            name: 'Techbods',
+            description: 'Electronics repair shop / websites ',
+        },
+        start: '2012',
+        end: '2015',
+        titles: ['Full-Stack Web Developer'],
+        points: [
+            'customer service',
+            'website creation and maintenance',
+            'developed the internal job tracking system',
+        ],
+    },
+]
+
+
+const tech: TechSkill[] = [
+    {
+        name: 'JavaScript',
+        level: 95,
+        years: '10+'
+    },
+    {
+        name: 'TypeScript',
+        level: 95,
+        years: '7+'
+    },
+    {
+        name: 'Docker',
+        level: 95,
+        years: '10+'
+    },
+    {
+        name: 'Laravel',
+        level: 85,
+        years: '5+'
+    },
+    {
+        name: 'Slim',
+        level: 95,
+        years: '8+'
+    },
+    {
+        name: 'HTML5',
+        level: 100,
+        years: '10+'
+    },
+    {
+        name: 'CSS3',
+        level: 90,
+        years: '10+'
+    },
+    {
+        name: 'Angular',
+        level: 55,
+        years: '2+'
+    },
+    {
+        name: 'React',
+        level: 40,
+        years: '1'
+    },
+    {
+        name: 'Git',
+        level: 95,
+        years: '10+'
+    },
+]
+
 export class App extends Component {
 
     protected css(): string {
@@ -51,6 +178,10 @@ export class App extends Component {
 
             h1 {
                 letter-spacing: .5rem;
+            }
+
+            h2 {
+                font-size: 1rem;
             }
 
             h3 {
@@ -178,139 +309,13 @@ export class App extends Component {
     protected build(): HTMLElement {
         const container = Dom.div('container')
 
-        const jobs: Job[] = [
-            {
-                company: {
-                    name: 'Mitratech Prevalent',
-                    description: 'Risk management platform',
-                },
-                start: '2023',
-                end: '2025',
-                titles: ['Software Engineer'],
-                points: [
-                    'Designed and delivered full-stack solutions aligned with stakeholder requirements.',
-                    'Oversaw the complete software lifecycle: design, implementation, testing, and deployment.',
-                    'Led platform upgrades and promoted stronger testing practices across the team.',
-                ],
-            },
-            {
-                company: {
-                    name: 'Efficio Consulting',
-                    description: 'Procurement consultancy',
-                },
-                start: '2016',
-                end: '2023',
-                titles: ['Software Engineer', 'Team Lead'],
-                points: [
-                    'Mentoring developers / Upskilling',
-                    'Initiated and led engineering-wide improvements, with a focus on quality, maintainability, and delivery speed.',
-                    'Lead development team on number of platform greenfields, additional features on existing products, upgrades of legacy software',
-                    'Advocate of TDD within digital',
-                ],
-            },
-            {
-                company: {
-                    name: 'Dedoko',
-                    description: 'website and web application development',
-                },
-                start: '2015',
-                end: '2016',
-                titles: ['Junior Developer'],
-                points: [
-                    'bug fixing',
-                    'website maintenance',
-                    'development of our main client (Efficio) platform of the time who later aquired Dedoko',
-                ],
-            },
-            {
-                company: {
-                    name: 'Techbods',
-                    description: 'Electronics repair shop / websites ',
-                },
-                start: '2012',
-                end: '2015',
-                titles: ['Full-Stack Web Developer'],
-                points: [
-                    'customer service',
-                    'website creation and maintenance',
-                    'developed the internal job tracking system',
-                ],
-            },
-        ]
-
-        const tech: TechSkill[] = [
-            {
-                name: 'JavaScript',
-                level: 95,
-                years: '10+'
-            },
-            {
-                name: 'TypeScript',
-                level: 95,
-                years: '7+'
-            },
-            {
-                name: 'Docker',
-                level: 95,
-                years: '10+'
-            },
-            {
-                name: 'Laravel',
-                level: 85,
-                years: '5+'
-            },
-            {
-                name: 'Slim',
-                level: 95,
-                years: '8+'
-            },
-            {
-                name: 'HTML5',
-                level: 100,
-                years: '10+'
-            },
-            {
-                name: 'CSS3',
-                level: 90,
-                years: '10+'
-            },
-            {
-                name: 'Angular',
-                level: 55,
-                years: '2+'
-            },
-            {
-                name: 'React',
-                level: 40,
-                years: '1'
-            },
-            {
-                name: 'Git',
-                level: 95,
-                years: '10+'
-            },
-        ]
-
-        const projects: Project[] = [
-            {
-                url: '',
-                title: 'Event Driven Web Component Framework',
-                description: 'My very own JS framework that I use for my personal projects',
-            },
-            {
-                url: '',
-                title: '2d Game Maker',
-                description: 'Layers of complexity to improve my core JS and client side knowledge',
-            },
-        ]
-
         container.innerHTML = /*html*/`
             <div class="row text-center">
                 <div class="profile-image">
-                    <img src="https://cdn.vectorstock.com/i/500p/62/34/user-profile-icon-anonymous-person-symbol-blank-vector-53216234.jpg" alt="Profile Image">
+                    <img src="/img/profile.png" alt="Profile Image">
                 </div>
-                <h1 class="name">Alex Winter</h1>
-                <p class="title">Senior Web Engineer</p>
+                <h1 class="name pt-2">Alex Winter</h1>
+                <h2 class="title py-3">Senior Web Engineer</h2>
             </div>
 
             <div class="row border-t border-b text-center contact-info p-3">
