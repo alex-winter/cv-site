@@ -19,6 +19,12 @@ type TechSkill = {
     years: string
 }
 
+type Project = {
+    title: string
+    url: string
+    description: string
+}
+
 export class App extends Component {
 
     protected css(): string {
@@ -49,6 +55,10 @@ export class App extends Component {
 
             h3 {
                 font-size: 1.125rem;
+            }
+
+            a {
+                text-decoration: none;
             }
 
             ul {
@@ -281,6 +291,19 @@ export class App extends Component {
             },
         ]
 
+        const projects: Project[] = [
+            {
+                url: '',
+                title: 'Event Driven Web Component Framework',
+                description: 'My very own JS framework that I use for my personal projects',
+            },
+            {
+                url: '',
+                title: '2d Game Maker',
+                description: 'Layers of complexity to improve my core JS and client side knowledge',
+            },
+        ]
+
         container.innerHTML = /*html*/`
             <div class="row text-center">
                 <div class="profile-image">
@@ -354,6 +377,14 @@ export class App extends Component {
                             <canvas></canvas>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="icon-heading my-3">
+                                <h3><i class="fa-solid fa-user-tie"></i> Current Projects</h3>
+                            </div>
+                            ${this.buildProjectLinks(projects)}
+                        </div>
+                    </div>
                 </div>
             </div>
         `
@@ -363,6 +394,15 @@ export class App extends Component {
 
     protected afterBuild(): void {
         this.makeProfileGraph()
+    }
+
+    private buildProjectLinks(projects: Project[]): string {
+        return projects.map(project => /*html*/`
+            <a href="${project.url}">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> ${project.title}
+            </a>
+            <p>${project.description}</p>    
+        `).join('')
     }
 
     private buildTech(tech: TechSkill[]): string {
