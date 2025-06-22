@@ -36,6 +36,11 @@ const projects = [
         title: '2d Game Maker',
         description: 'Layers of complexity to improve my core JS and client side knowledge',
     },
+    {
+        url: 'https://github.com/alex-winter/nimbus-weather-forecast',
+        title: 'Nimbus Weather Forecast',
+        description: 'Built in React js a simple weather app that plugs into APIs'
+    }
 ]
 
 const jobs: Job[] = [
