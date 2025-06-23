@@ -151,7 +151,7 @@ const tech: TechSkill[] = [
     },
     {
         name: 'React',
-        level: 40,
+        level: 60,
         years: '1'
     },
     {
