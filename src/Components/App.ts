@@ -336,8 +336,8 @@ export class App extends Component {
                     <a href="mailto:ajwinter42@gmail.com">ajwinter42@gmail.com</a>
                 </div>
                 <div class="col-12 col-sm-12 col-md-4">
-                    <i class="fab fa-github"></i>
-                    <a href="https://github.com/alex-winter" target="_blank">alex-winter</a>
+                    <i class="fa-brands fa-linkedin"></i>
+                    <a href="https://www.linkedin.com/in/alex-winter-7554a349/" target="_blank"> Linkedin</a>
                 </div>
             </div>
 
